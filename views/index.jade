@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form(name="login", action="/search", method="get")
+    input(type="text", name="q")
+    input(type="submit", value="Search")
