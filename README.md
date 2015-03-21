@@ -1,6 +1,6 @@
 # NodeJS test
 
-Playing around with node all all the associated tooling.
+Playing around with node and some of the associated tooling.
 
 So far, trying out:
 
