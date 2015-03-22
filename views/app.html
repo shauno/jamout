@@ -21,15 +21,57 @@
       <![endif]-->
     </head>
 
-    <body>
+    <body ng-app="jamout">
 
       <div class="container">
 
-        <div class="row">
-          Welcome to the app...
+        <div class="row" ng-controller="TrackController as tracks">
+          <div class="col-lg-3">
+            <h1>Tracks</h1>
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="track in tracks.list">{{ track.name }}</li>
+            </ul>
+
+              <!--<input type="text" ng-model="search.q" /><br />-->
+            <button type="submit" class="btn btn-default" onclick="openSearchModal()">Add Track</button>
+
+          </div>
         </div>
 
       </div><!-- /.container -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="searchModal" ng-controller="SearchController as search">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Search</h4>
+            </div>
+
+            <div class="modal-body">
+              <form ng-submit="search.search()">
+                <input type="text" class="form-control" ng-model="search.q" placeholder="Track name" /><br />
+                <button type="submit" class="btn btn-default">Search</button>
+              </form>
+
+              <ul class="list-group">
+                <li class="list-group-item" ng-repeat="item in search.results.items">
+                  <a href ng-click="search.select($index)">
+                    {{ item.snippet.title }}
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     <!-- Bootstrap core JavaScript

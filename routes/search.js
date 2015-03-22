@@ -14,12 +14,14 @@ router.get('/', function(req, res, next) {
 
     youtube.search(q, 5, function(error, result) {
         if (error) {
-            //res.write(JSON.stringify(error));
+            res.write(JSON.stringify(error));
             res.end();
         }else {
-            //console.log(room);
-            res.write(JSON.stringify(result, null, 2));
-            res.end();
+            //probably a good idea to massage this data into a format fit fot the app?
+            res.writeHead(200, {
+                'Content-Type': 'application/json'
+            });
+            res.end(JSON.stringify(result, null, 2));
         }
     });
 
