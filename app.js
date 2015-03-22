@@ -16,6 +16,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var routes = require('./routes/index');
 var facebook = require('./routes/facebook');
 var search = require('./routes/search');
+var addtrack = require('./routes/add-track');
 
 var app = express();
 
@@ -66,6 +67,7 @@ passport.use(new FacebookStrategy({
 //app.use('/', routes);
 app.use('/auth', facebook);
 app.use('/api/search', search);
+app.use('/api/add-track', addtrack);
 
 app.use(express.static(__dirname + '/public'));
 
