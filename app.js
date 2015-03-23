@@ -32,12 +32,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(require('express-mongo-db')(require('mongodb')));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({
-    db: process.env.DB_NAME 
+    db: process.env.DB_NAME
   })
 }));
 
