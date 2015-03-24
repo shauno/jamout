@@ -33,7 +33,9 @@ app.use(multer());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(require('express-mongo-db')(require('mongodb')));
+app.use(require('express-mongo-db')(require('mongodb'), {
+  database: process.env.DB_NAME
+}));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
