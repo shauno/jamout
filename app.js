@@ -83,6 +83,20 @@ app.use(function(req, res, next) {
       root: __dirname
     });
   }else{
+    //TODO, clean up adding the room if it doesn't exist
+    var rooms = req.db.collection('rooms');
+
+    var room = rooms.findOne({name: 'Kiff Jams'}, function(err, item) {
+      if(!err) {
+        if(item) {
+          req.session.room = item;
+        }else{
+          rooms.insert({name: 'Kiff Jams'}, function(err, result) {
+          });
+        }
+      }
+    });
+
     res.sendFile('/views/app.html', {
       root: __dirname
     });
