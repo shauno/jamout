@@ -88,12 +88,16 @@ app.use(function(req, res, next) {
 
     var room = rooms.findOne({name: 'Kiff Jams'}, function(err, item) {
       if(!err) {
-        if(item) {
-          req.session.room = item;
-        }else{
-          rooms.insert({name: 'Kiff Jams'}, function(err, result) {
+        if(!item) {
+          item = {
+            name: 'Kiff Jams',
+            tracks: []
+          };
+          rooms.insert(item, function(err, result) {
           });
         }
+
+        req.session.room = item;
       }
     });
 
